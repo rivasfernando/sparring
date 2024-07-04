@@ -2,7 +2,7 @@ pipeline{
     agent {
         docker { 
             image 'maven:3.8.6-openjdk-11-slim'
-            args '--env=DOCKER_HOST=tcp://host.docker.internal:2375'
+            args '--env=DOCKER_HOST=tcp://host.docker.internal:2375 -v $HOME/.m2'
         }
     }
 
