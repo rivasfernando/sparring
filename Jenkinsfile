@@ -26,7 +26,7 @@ pipeline{
         stage("Docker build"){
             agent {
                 docker { 
-                    image 'maven:3.8.6-openjdk-8-slim'
+                    image 'docker:26.1-cli'
                     args '--env=DOCKER_HOST=tcp://host.docker.internal:2375 -v $HOME/.m2'
                 }
             }
