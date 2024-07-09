@@ -1,6 +1,10 @@
 pipeline{
     agent any
 
+    tools {
+        jdk "openjdk8"
+    }
+
     stages{
         stage("Checkout"){
             steps{
@@ -12,6 +16,7 @@ pipeline{
         stage("Build"){
             steps{
                 echo "Building..."
+                sh "java -version"
                 sh "mvn clean package"
                 archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
             }
