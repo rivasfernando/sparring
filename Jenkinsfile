@@ -36,6 +36,10 @@ pipeline{
         stage("Docker deploy"){
             steps{
                 echo "Deploying..."
+                echo "Shutting down old containers"
+                sh "docker-compose down"
+                echo "Starting new containers"
+                sh "docker-compose up"
             }
         }
 
