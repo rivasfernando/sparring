@@ -39,7 +39,7 @@ pipeline{
                 echo "Shutting down old containers"
                 sh "docker-compose down"
                 echo "Starting new containers"
-                sh "docker-compose up"
+                sh "docker-compose up -d"
             }
         }
 
