@@ -1,10 +1,5 @@
 pipeline{
-    agent {
-        docker { 
-            image 'maven:3.8.6-openjdk-8-slim'
-            args '--env=DOCKER_HOST=tcp://host.docker.internal:2375 -v $HOME/.m2'
-        }
-    }
+    agent any
 
     stages{
         stage("Checkout"){
@@ -17,19 +12,12 @@ pipeline{
         stage("Build"){
             steps{
                 echo "Building..."
-                sh "mvn clean"
-                sh "mvn package"
+                sh "mvn clean package"
                 archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
             }
         }
 
         stage("Docker build"){
-            agent {
-                docker { 
-                    image 'docker:26.1-cli'
-                    args '--env=DOCKER_HOST=tcp://host.docker.internal:2375 -v $HOME/.m2'
-                }
-            }
             steps{
                 echo "Building Docker image..."
                 script {
