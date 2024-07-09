@@ -27,6 +27,8 @@ pipeline{
                 echo "Building Docker image..."
                 script {
                     def customImage = docker.build("sparring-web:${env.BUILD_ID}", "sparring-web")
+                    def customImage = docker.build("sparring-admin:${env.BUILD_ID}", "sparring-admin")
+                    def customImage = docker.build("sparring-db:${env.BUILD_ID}", "sparring-db")
                 }
             }
         }
