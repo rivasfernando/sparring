@@ -1,4 +1,4 @@
-version: '3'
+#version: '3'
 services:
   db:
     image: sparring-db
@@ -23,6 +23,17 @@ services:
     image: sparring/sparring-admin
     ports:
       - 8081:8080
+  dd-agent:
+    image: datadog/agent
+    ports:
+      - 8126:8126
+    environment:
+      DD_ENV: ferlab
+      DD_HOSTNAME: ferlab-notebook
+      DD_APM_ENABLED: true
+      DD_APM_NON_LOCAL_TRAFFIC: yes
+      DD_LOGS_ENABLED: yes
+      DD_API_KEY: 9ddc71626bff5d8ef2cb96592ced10de
 
 volumes:
   db-data:
